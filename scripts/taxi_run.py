@@ -1,7 +1,8 @@
-from __future__ import print_function
+import sys
+sys.path.append("..")
 from ifqi.envs import TaxiEnv
 from ifqi.evaluation import evaluation
-from policy import BoltzmannPolicy, TaxiEnvPolicy, EpsilonGreedyBoltzmannPolicy
+from policy_old import BoltzmannPolicy, TaxiEnvPolicy, EpsilonGreedyBoltzmannPolicy
 import numpy as np
 import numpy.linalg as la
 import matplotlib.pyplot as plt
@@ -692,7 +693,7 @@ if __name__ == '__main__':
 
     lpal_policies.append(lpal.fit())
 
-    from policy import TabularPolicy
+    from policy_old import TabularPolicy
     lpal_tab_policies = map(TabularPolicy, lpal_policies)
     lpal_returns = []
     lpal_labels = ['LPAL natural features', 'LPAL ECO-R model free', 'LPAL ECO-R model based']

@@ -4,7 +4,7 @@ from gym import spaces
 from gym.utils import seeding
 import numpy as np
 
-from environment import Environment
+from ifqi.envs.environment import Environment
 
 from gym.spaces import prng
 """

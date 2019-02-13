@@ -76,7 +76,9 @@ def policy_iteration(env, value, policy, gamma=0.9):
         policy_stable -= policy_update(env, value, policy, gamma)
 
 def compute_policy():
-    env = gym.make('Taxi-v1')
+    env = gym.make('Taxi-v2').env
+    env.gamma = 0.99
+    env.horizon = 100
 
     value = ValueFuntion(env)
     policy = TablePolicy(env)

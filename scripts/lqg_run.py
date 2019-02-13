@@ -1,7 +1,8 @@
-from __future__ import print_function
-from ifqi.envs import LQG1D
+import sys
+sys.path.append("..")
+from ifqi.envs.lqg1d import LQG1D
 from ifqi.evaluation import evaluation
-from policy import GaussianPolicy1D
+from policy_old import GaussianPolicy1D
 from reward_space.inverse_reinforcement_learning.girl import LinearGIRL
 from reward_space.utils.continuous_env_sample_estimator import ContinuousEnvSampleEstimator
 from reward_space.utils.k_neighbors_regressor_2 import KNeighborsRegressor2

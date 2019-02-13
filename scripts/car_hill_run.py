@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import ExtraTreesRegressor
@@ -7,7 +9,7 @@ from ifqi.evaluation.utils import check_dataset, split_data_for_fqi
 from ifqi.algorithms.fqi import FQI
 from ifqi.models.actionregressor import ActionRegressor
 from ifqi.models.regressor import Regressor
-from policy import RBFGaussianPolicy
+from policy_old import RBFGaussianPolicy
 from reward_space.utils.continuous_env_sample_estimator import ContinuousEnvSampleEstimator
 from reward_space.policy_gradient.gradient_estimator import MaximumLikelihoodEstimator
 import reward_space.utils.linalg2 as la2
@@ -143,7 +145,7 @@ n_episodes_ml = 20
 trajectories_ml = evaluation.collect_episodes(mdp, ml_policy, n_episodes_ml)
 print('ML policy trajectories have %d samples' % trajectories_ml.shape[0])
 print('ML policy return %s' % np.dot(trajectories_ml[:, 3], trajectories_ml[:, 6]/20))
-r.append(np.dot(trajectories_ml[:, 3], trajectories_ml[:, 6]/20))
+r = np.append(r, np.dot(trajectories_ml[:, 3], trajectories_ml[:, 6]/20))
 
 rmean = np.mean(r)
 rstd = np.std(r)

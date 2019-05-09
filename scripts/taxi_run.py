@@ -580,6 +580,26 @@ if __name__ == '__main__':
     print('J ML policy %s' % estimator_ml.get_J())
     print('J expert policy %s' % estimator_ex.get_J())
 
+
+    # ---------------------------------------------------------------------------
+
+    trajectories_random = evaluation.collect_episodes(mdp, n_episodes=n_episodes)
+
+    from reward_space.inverse_reinforcement_learning.reirl import RelativeEntropyIRL
+
+    re_state = RelativeEntropyIRL(state_features,
+                                 trajectories_ex,
+                                 trajectories_random,
+                                 mdp_wrap.gamma,
+                                 mdp_wrap.horizon,
+                                 n_states,
+                                 n_actions,
+                                 learning_rate=0.01,
+                                 max_iter=100)
+    re_reward = re_state.fit()
+    re_reward = np.repeat(re_reward, n_actions)
+    print('RELATIVE ENTROPY: %s', re_reward)
+
     # ---------------------------------------------------------------------------
 
     policy = expert_policy
@@ -832,6 +852,8 @@ if __name__ == '__main__':
 
     # ---------------------------------------------------------------------------
     # Build feature sets
+    names.append('RE-IRL')
+    basis_functions.append(re_reward)
     names.append('ME-IRL')
     basis_functions.append(me_reward)
     names.append('Hessian model_free ECOR')

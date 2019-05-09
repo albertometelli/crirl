@@ -181,7 +181,7 @@ if __name__ == '__main__':
     pi_tilde = np.zeros((n_samples, n_samples))
     for i in range(n_samples):
         pi_tilde[i, i] = policy.pdf(states[i], actions[i])
-        _, idx = knn_states.kneighbors(states[i])
+        _, idx = knn_states.kneighbors([[states[i]]])
         idx = idx.ravel()
         for j in idx:
             pi_tilde[i, j] = policy.pdf(states[j], actions[j])

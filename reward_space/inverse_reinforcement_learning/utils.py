@@ -6,7 +6,8 @@ def compute_feature_expectations(reward_features,
                                  action_space=None,
                                  gamma=0.99,
                                  horizon=100,
-                                 type_='state-action'):
+                                 type_='state-action',
+                                 return_mode='sum'):
 
     n_features = reward_features.shape[1]
     n_trajectories = int(trajectories[:, -1].sum())
@@ -52,4 +53,7 @@ def compute_feature_expectations(reward_features,
 
         i += 1
 
-    return feature_expectation.sum(axis=0).ravel()
+    if return_mode == 'sum':
+        return feature_expectation.sum(axis=0).ravel()
+    else:
+        return feature_expectation.squeeze()
